@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct TaskView: View {
+
+    @Binding var task: Task
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image(systemName: task.isCompleted ? "largecircle.fill.circle" : "circle")
+                .onTapGesture {
+                    task.isCompleted.toggle()
+                }
+            TextField("New Task", text: $task.title)
+                .textFieldStyle(.plain)
+        }
     }
 }
 
 #Preview {
-    TaskView()
+    TaskView(task: .constant(Task.example()))
 }
